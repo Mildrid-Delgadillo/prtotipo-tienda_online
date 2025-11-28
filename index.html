@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estilo Urbano | Ropa Contemporánea y Tecnológica</title>
+    <!-- Incluye Tailwind CSS para un diseño moderno y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Iconos de Lucide -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Definición de la paleta de colores (más plural) */
+        :root {
+            --color-primary: #008DFF; /* Azul Eléctrico vibrante */
+            --color-secondary: #FF4D6D; /* Rosa coral/fucsia vibrante para acentos */
+            --color-dark: #1F2937; /* Gris Oscuro (Texto y fondo principal) */
+            --color-light: #F3F4F6; /* Gris Claro (Fondos secundarios) */
+        }
+        .text-primary { color: var(--color-primary); }
+        .bg-primary { background-color: var(--color-primary); }
+        .text-secondary { color: var(--color-secondary); }
+        .bg-secondary { background-color: var(--color-secondary); }
+        .border-primary { border-color: var(--color-primary); }
+
+        /* Estilo base para el cuerpo y la tipografía */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-dark);
+            background-color: white;
+        }
+
+        /* Estilo para el slider (simulación visual) */
+        .slider-item {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+            width: 100%;
+        }
+
+        /* Estilo para el chat (simulación visual) */
+        #chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        /* Clase para las "páginas" */
+        .page-content {
+            display: none; /* Oculta todas las secciones por defecto */
+            min-height: calc(100vh - 100px); /* Asegura que la sección al menos ocupe la pantalla */
+        }
+
+        .page-content.active {
+            display: block; /* Muestra solo la sección activa */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Script de configuración de íconos y utilidad global de estrellas -->
+    <script>
+        // Función para generar las estrellas de valoración (DEFINICIÓN GLOBAL EN EL HEAD PARA USO EN document.write)
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            let html = '';
+            for (let i = 0; i < 5; i++) {
+                if (i < fullStars) {
+                    html += '<i data-lucide="star" class="w-4 h-4 fill-secondary text-secondary"></i>';
+                } else {
+                    html += '<i data-lucide="star" class="w-4 h-4 text-gray-300"></i>';
+                }
+            }
+            return html;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
+
+    <!-- 1. HEADER (Identidad del sitio: Logo y Navegación) -->
+    <header class="sticky top-0 bg-white shadow-md z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo (Texto + Isotipo simplificado) -->
+            <a href="#" data-page-link="inicio" class="flex items-center space-x-2">
+                <!-- LOGO ACTUALIZADO: Se cambió el ícono SVG por un rayo (Zap) -->
+                <i data-lucide="zap" class="w-7 h-7 text-primary stroke-2"></i>
+                <span class="text-xl font-extrabold tracking-tight text-dark">Estilo Urbano</span>
+            </a>
+
+            <!-- Menú de Navegación (visible en escritorio) -->
+            <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                <!-- Se usa data-page-link en lugar de onclick directo -->
+                <a href="#" data-page-link="tienda" class="hover:text-primary transition duration-300">Tienda</a>
+                <a href="#" data-page-link="nosotros" class="hover:text-primary transition duration-300">Quiénes Somos</a>
+                <a href="#" data-page-link="faq" class="hover:text-primary transition duration-300">FAQ</a>
+                <a href="#" data-page-link="contacto" class="hover:text-primary transition duration-300">Contacto</a>
+            </nav>
+
+            <!-- Íconos de Carrito y Cuenta -->
+            <div class="flex items-center space-x-4">
+                <a href="#" data-page-link="carrito" class="p-2 rounded-full hover:bg-gray-100 transition">
+                    <i data-lucide="shopping-cart" class="w-5 h-5 text-dark"></i>
+                </a>
+                <button class="md:hidden p-2 rounded-full hover:bg-gray-100 transition">
+                    <i data-lucide="menu" class="w-6 h-6 text-dark"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-grow">
+        <!-- Contenedor principal para simular la navegación entre páginas -->
+
+        <!-- 2. SECCIÓN DE INICIO (HOME) -->
+        <section id="inicio" data-page="inicio" class="page-content active">
+            
+            <!-- 2.1 SLIDER PRINCIPAL DE PROMOCIONES -->
+            <div class="relative w-full overflow-hidden bg-gray-100 shadow-inner">
+                <div class="flex overflow-x-scroll snap-x snap-mandatory scroll-smooth" id="product-slider">
+                    <!-- Slide 1 -->
+                    <div class="slider-item h-[60vh] md:h-[80vh] bg-cover bg-center flex items-center justify-center" style="background-image: url('https://placehold.co/1200x800/222222/ffffff?text=Nueva+Coleccion+Techwear');">
+                        <div class="text-center p-8 bg-black/50 rounded-lg backdrop-blur-sm">
+                            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 drop-shadow-lg">Nuevas Colecciones: Ahora Disponibles</h1>
+                            <p class="text-xl text-white/90 mb-6">Diseño, tecnología y comodidad. Lo último del estilo urbano.</p>
+                            <a href="#" data-page-link="tienda" class="inline-block px-8 py-3 bg-secondary text-white font-bold rounded-full hover:bg-secondary/80 transition duration-300 transform hover:scale-105 shadow-xl">Comprar Ahora</a>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="slider-item h-[60vh] md:h-[80vh] bg-cover bg-center flex items-center justify-center" style="background-image: url('https://placehold.co/1200x800/008DFF/ffffff?text=Innovacion+en+Calzado');">
+                        <div class="text-center p-8 bg-black/50 rounded-lg backdrop-blur-sm">
+                            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 drop-shadow-lg">Calzado de Alto Rendimiento</h1>
+                            <p class="text-xl text-white/90 mb-6">Lleva tu estilo al siguiente nivel. Exclusivo de Estilo Urbano.</p>
+                            <a href="#" data-page-link="tienda" class="inline-block px-8 py-3 bg-white text-dark font-bold rounded-full hover:bg-gray-200 transition duration-300 transform hover:scale-105 shadow-xl">Ver Modelos</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Controles de navegación (simulación) -->
+                <button onclick="scrollSlider(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/30 rounded-full text-white hover:bg-black/50 transition"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
+                <button onclick="scrollSlider(1)" class="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/30 rounded-full text-white hover:bg-black/50 transition"><i data-lucide="chevron-right" class="w-6 h-6"></i></button>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <!-- 2.2 NOVEDADES (Estructura de 2 columnas) -->
+                <h2 class="text-3xl font-extrabold text-center mb-10 text-dark">Novedades</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                    <!-- Novedad 1 -->
+                    <div class="rounded-xl overflow-hidden shadow-lg bg-white group hover:shadow-xl transition duration-300">
+                        <a href="#" data-page-link="tienda">
+                            <img src="https://placehold.co/600x400/FF4D6D/ffffff?text=Producto+Nuevo+1" alt="Chaqueta Techwear" class="w-full h-72 object-cover transition duration-500 group-hover:scale-[1.03] group-hover:opacity-80">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-dark mb-1">Urban Tracker Jacket</h3>
+                                <p class="text-gray-500 text-sm">Chaqueta impermeable con diseño modular.</p>
+                                <p class="text-primary font-extrabold mt-2">$145.00</p>
+                                <div class="mt-3 flex items-center justify-between">
+                                     <span class="text-xs text-secondary font-semibold uppercase">¡HOT!</span>
+                                     <button class="px-4 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary/80 transition">Ver Detalle</button>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Novedad 2 -->
+                    <div class="rounded-xl overflow-hidden shadow-lg bg-white group hover:shadow-xl transition duration-300">
+                        <a href="#" data-page-link="tienda">
+                            <img src="https://placehold.co/600x400/008DFF/ffffff?text=Producto+Nuevo+2" alt="Zapatillas Ligeras" class="w-full h-72 object-cover transition duration-500 group-hover:scale-[1.03] group-hover:opacity-80">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-dark mb-1">Sneakers Fusion Mesh</h3>
+                                <p class="text-gray-500 text-sm">Calzado ultra-ligero y transpirable para la ciudad.</p>
+                                <p class="text-primary font-extrabold mt-2">$99.99</p>
+                                <div class="mt-3 flex items-center justify-between">
+                                    <span class="text-xs text-secondary font-semibold uppercase">¡NUEVO!</span>
+                                    <button class="px-4 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary/80 transition">Ver Detalle</button>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2.3 LOS MÁS VENDIDOS (Estructura de 4 columnas) -->
+                <h2 class="text-3xl font-extrabold text-center mb-10 text-dark">Los Más Vendidos</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <script>
+                        // Datos para los más vendidos (4 productos)
+                        const bestSellers = [
+                            { name: "Sudadera Neon Pink", price: "72.00", rating: 4.7, img_color: "FF4D6D" },
+                            { name: "Mochila Anti-robo Coder", price: "95.00", rating: 5.0, img_color: "1F2937" },
+                            { name: "Tenis UrbanLite PRO", price: "120.50", rating: 4.5, img_color: "008DFF" },
+                            { name: "Gorra Techwear", price: "29.99", rating: 4.7, img_color: "F3F4F6" },
+                        ];
+
+                        bestSellers.forEach(p => {
+                            document.write(`
+                                <div class="group relative bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-0.5">
+                                    <a href="#" data-page-link="tienda">
+                                        <div class="w-full h-48 overflow-hidden bg-gray-200">
+                                            <img src="https://placehold.co/300x400/${p.img_color}/ffffff?text=${p.name.replace(/\s/g, '+')}" alt="${p.name}" class="h-full w-full object-cover object-center group-hover:opacity-90 transition duration-500">
+                                        </div>
+                                        <div class="p-3">
+                                            <h3 class="text-sm font-semibold text-dark truncate">${p.name}</h3>
+                                            <div class="flex items-center mt-1">
+                                                <!-- Estrellas de Valoración (función JS del catálogo) -->
+                                                <div class="flex -space-x-1">${generateStars(p.rating)}</div>
+                                            </div>
+                                            <p class="text-lg font-bold text-primary mt-1">$${p.price}</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            `);
+                        });
+                    </script>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. TIENDITA VIRTUAL (Catálogo de 20 productos) -->
+        <!-- Se agrega la clase 'page-content' y data-page="tienda" -->
+        <section id="tienda" data-page="tienda" class="page-content py-16 bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-extrabold text-center mb-12 text-dark">Tienda Virtual <span class="text-primary">/ Catálogo</span></h2>
+
+            <!-- 3.1 CATEGORÍAS (Estructura de 6 columnas) -->
+            <div class="grid grid-cols-3 sm:grid-cols-6 gap-4 mb-10">
+                <div class="text-center p-3 rounded-xl border border-gray-200 hover:border-primary transition cursor-pointer bg-light hover:bg-primary/10">
+                    <i data-lucide="shirt" class="w-8 h-8 mx-auto mb-2 text-primary"></i>
+                    <p class="text-xs font-semibold text-dark">Ropa Dama</p>
+                </div>
+                <div class="text-center p-3 rounded-xl border border-gray-200 hover:border-primary transition cursor-pointer bg-light hover:bg-primary/10">
+                    <i data-lucide="t-shirt" class="w-8 h-8 mx-auto mb-2 text-primary"></i>
+                    <p class="text-xs font-semibold text-dark">Ropa Caballeros</p>
+                </div>
+                <div class="text-center p-3 rounded-xl border border-gray-200 hover:border-secondary transition cursor-pointer bg-light hover:bg-secondary/10">
+                    <i data-lucide="footprints" class="w-8 h-8 mx-auto mb-2 text-secondary"></i>
+                    <p class="text-xs font-semibold text-dark">Calzado Dama</p>
+                </div>
+                <div class="text-center p-3 rounded-xl border border-gray-200 hover:border-secondary transition cursor-pointer bg-light hover:bg-secondary/10">
+                    <i data-lucide="shoe" class="w-8 h-8 mx-auto mb-2 text-secondary"></i>
+                    <p class="text-xs font-semibold text-dark">Calzado Caballero</p>
+                </div>
+                <div class="text-center p-3 rounded-xl border border-gray-200 hover:border-primary transition cursor-pointer bg-light hover:bg-primary/10">
+                    <i data-lucide="child" class="w-8 h-8 mx-auto mb-2 text-primary"></i>
+                    <p class="text-xs font-semibold text-dark">Niños</p>
+                </div>
+                <div class="text-center p-3 rounded-xl border border-gray-200 hover:border-dark transition cursor-pointer bg-light hover:bg-dark/10">
+                    <i data-lucide="dumbbell" class="w-8 h-8 mx-auto mb-2 text-dark"></i>
+                    <p class="text-xs font-semibold text-dark">Deportivos</p>
+                </div>
+            </div>
+
+            <!-- 3.2 PROMOCIONES (Estructura de 2 columnas con promociones) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                <!-- Bloque 1: Venta en curso (2/3 de ancho) -->
+                <div class="md:col-span-2 p-6 rounded-xl border border-secondary shadow-lg bg-secondary/10 flex flex-col justify-center items-center text-center">
+                    <h3 class="text-3xl font-extrabold text-secondary mb-2">Ongoing SALE. 50% OFF.</h3>
+                    <p class="text-lg text-dark mb-4">Renueva tu closet con la mejor tecnología.</p>
+                    <button class="px-6 py-3 bg-secondary text-white font-bold rounded-lg hover:bg-secondary/80 transition shadow-md">Browse products</button>
+                </div>
+                <!-- Bloque 2: Más Vendidos (1/3 de ancho) -->
+                <div class="md:col-span-1 p-6 rounded-xl border border-gray-300 shadow-md bg-white flex flex-col justify-center items-center text-center">
+                    <h3 class="text-2xl font-bold text-dark mb-2">Bestselling products</h3>
+                    <p class="text-md text-gray-500 mb-4">Descubre lo que todos están llevando.</p>
+                    <button class="px-6 py-3 bg-dark text-white font-bold rounded-lg hover:bg-gray-700 transition shadow-md">Explore</button>
+                </div>
+            </div>
+            
+            <!-- 3.3 INSPIRACIÓN Y PRODUCTOS RECOMENDADOS (Simulando el resto de la página) -->
+            <h3 class="text-3xl font-extrabold text-dark mb-6">Inspiración</h3>
+            <p class="text-gray-600 mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.</p>
+
+            <!-- Carrusel de inspiración (5 columnas) -->
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-16">
+                <div class="rounded-xl overflow-hidden bg-gray-200 h-48 flex items-center justify-center border border-dashed">
+                    <span class="text-gray-500 text-sm">Look 1</span>
+                </div>
+                <div class="rounded-xl overflow-hidden bg-gray-200 h-48 flex items-center justify-center border border-dashed">
+                    <span class="text-gray-500 text-sm">Look 2</span>
+                </div>
+                <div class="rounded-xl overflow-hidden bg-gray-200 h-48 flex items-center justify-center border border-dashed">
+                    <span class="text-gray-500 text-sm">Look 3</span>
+                </div>
+                <div class="rounded-xl overflow-hidden bg-gray-200 h-48 flex items-center justify-center border border-dashed hidden sm:flex">
+                    <span class="text-gray-500 text-sm">Look 4</span>
+                </div>
+                <div class="rounded-xl overflow-hidden bg-gray-200 h-48 flex items-center justify-center border border-dashed hidden sm:flex">
+                    <span class="text-gray-500 text-sm">Look 5</span>
+                </div>
+            </div>
+
+
+            <!-- Título de productos recomendados -->
+            <h3 class="text-3xl font-extrabold text-dark mb-6">Productos Recomendados</h3>
+            <p class="text-gray-600 mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.</p>
+
+            <!-- Grid de Productos (20 simulados - replicando el anterior) -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+                <script>
+                    const products = [
+                        { name: "Chaqueta Cortavientos Neo", price: "89.99", rating: 4.8 },
+                        { name: "Tenis UrbanLite PRO", price: "120.50", rating: 4.5 },
+                        { name: "Hoodie Reflectiva X", price: "65.00", rating: 4.9 },
+                        { name: "Pantalón Cargo Blackout", price: "79.99", rating: 4.6 },
+                        { name: "Gorra Techwear", price: "29.99", rating: 4.7 },
+                        { name: "Camiseta Algodón Orgánico", price: "35.00", rating: 4.4 },
+                        { name: "Mochila Anti-robo Coder", price: "95.00", rating: 5.0 },
+                        { name: "Calcetines Tácticos (3-pack)", price: "19.99", rating: 4.3 },
+                        { name: "Sudadera Neon Pink", price: "72.00", rating: 4.7 },
+                        { name: "Tenis Malla Transpirable", price: "110.00", rating: 4.5 },
+                        { name: "Abrigo Largo Utility", price: "150.00", rating: 4.8 },
+                        { name: "Pantalón Jogger Comfort", price: "55.00", rating: 4.6 },
+                        { name: "Riñonera Crossover", price: "45.00", rating: 4.4 },
+                        { name: "Camisa Oversize Denim", price: "60.00", rating: 4.7 },
+                        { name: "Anillo Inteligente NFC", price: "135.00", rating: 4.9 },
+                        { name: "Shorts Deportivos Lite", price: "40.00", rating: 4.5 },
+                        { name: "Set de Parches Urbanos", price: "15.00", rating: 4.2 },
+                        { name: "Pulsera LED de Neón", price: "25.00", rating: 4.6 },
+                        { name: "Guantes Táctiles Invierno", price: "39.99", rating: 4.8 },
+                        { name: "Cadena Plateada Minimal", price: "50.00", rating: 4.5 }
+                    ];
+                    
+                    
+                    // Generar los 20 productos del catálogo
+                    products.forEach(p => {
+                        document.write(`
+                            <div class="group relative bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                                <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-200 h-64">
+                                    <img src="https://placehold.co/300x400/D1D5DB/${p.rating >= 4.7 ? '008DFF' : '1F2937'}?text=${p.name.replace(/\s/g, '+')}" alt="${p.name}" class="h-full w-full object-cover object-center group-hover:opacity-75 transition duration-500">
+                                </div>
+                                <div class="p-4 flex flex-col justify-between">
+                                    <h3 class="text-sm font-semibold text-dark truncate">
+                                        <a href="#" data-page-link="tienda" class="hover:text-primary transition">
+                                            ${p.name}
+                                        </a>
+                                    </h3>
+                                    <div class="flex items-center mt-1">
+                                        <div class="flex -space-x-1">${generateStars(p.rating)}</div>
+                                        <span class="ml-2 text-xs text-gray-500">(${p.rating})</span>
+                                    </div>
+                                    <p class="text-lg font-bold text-primary mt-2">$${p.price}</p>
+                                    <!-- Botón de Valoración y Agregar (simulación) -->
+                                    <button class="mt-3 w-full py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary/80 transition duration-300">
+                                        Añadir al Carrito
+                                    </button>
+                                </div>
+                            </div>
+                        `);
+                    });
+                </script>
+            </div>
+        </section>
+
+        <!-- PÁGINA CARRITO (SIMULACIÓN) -->
+        <!-- Se agrega la clase 'page-content' y data-page="carrito" -->
+        <section id="carrito" data-page="carrito" class="page-content py-16 bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-extrabold text-center mb-12 text-dark">Tu Carrito de <span class="text-secondary">Compras</span></h2>
+            <div class="max-w-4xl mx-auto bg-light p-8 rounded-xl shadow-lg">
+                <p class="text-center text-lg text-gray-600">Esta es la página de Carrito. Aquí se vería el resumen de productos y el proceso de Checkout.</p>
+                <div class="mt-6 flex justify-center space-x-4">
+                    <button onclick="showPage('tienda')" class="px-6 py-3 border border-primary text-primary font-bold rounded-lg hover:bg-primary hover:text-white transition">Seguir Comprando</button>
+                    <button class="px-6 py-3 bg-secondary text-white font-bold rounded-lg hover:bg-secondary/80 transition">Proceder al Pago</button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 4. SECCIONES INFORMATIVAS: Quiénes Somos, Misión, Visión, Políticas de Calidad -->
+        <!-- Se agrega la clase 'page-content' y data-page="nosotros" -->
+        <section id="nosotros" data-page="nosotros" class="page-content py-16 bg-light">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-extrabold text-center mb-12 text-dark">Nuestra Esencia <span class="text-secondary">Urbana</span></h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <!-- Quiénes Somos (basado en el wireframe) -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold mb-4 flex items-center"><i data-lucide="building-2" class="w-6 h-6 mr-2 text-primary"></i> Quiénes Somos</h3>
+                        <p class="text-gray-700 leading-relaxed">**Estilo Urbano** nace en 2024 como la plataforma que fusiona la moda callejera contemporánea con la innovación textil. Somos una marca dedicada a quienes no se conforman con lo básico, ofreciendo prendas que combinan diseño vanguardista, funcionalidad tecnológica y comodidad absoluta. Nos define el dinamismo de la ciudad, la inclusión de todos los estilos y un compromiso inquebrantable con la calidad y la durabilidad. Estamos aquí para vestir la próxima generación de la vida urbana.</p>
+                    </div>
+
+                    <!-- Misión y Visión -->
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-xl shadow-lg">
+                            <h4 class="text-xl font-bold mb-2 flex items-center"><i data-lucide="eye" class="w-5 h-5 mr-2 text-secondary"></i> Visión</h4>
+                            <p class="text-gray-700">Ser la marca de referencia global y líder en el segmento "Techwear" y moda urbana de alta calidad, transformando la manera en que las personas interactúan con sus prendas y el entorno citadino.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg">
+                            <h4 class="text-xl font-bold mb-2 flex items-center"><i data-lucide="target" class="w-5 h-5 mr-2 text-primary"></i> Misión</h4>
+                            <p class="text-700">Diseñar, producir y comercializar ropa y accesorios innovadores, utilizando materiales de última generación para garantizar la máxima funcionalidad y estética urbana, superando siempre las expectativas de nuestros clientes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Políticas de Calidad y Ubicación -->
+                <div class="mt-10 bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center"><i data-lucide="check-circle" class="w-6 h-6 mr-2 text-primary"></i> Políticas de Calidad</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 ml-4">
+                        <li>**Certificación Textil:** Nos aseguramos de que todos nuestros tejidos cumplan con estándares internacionales de resistencia, durabilidad y funcionalidad (como impermeabilidad o transpirabilidad).</li>
+                        <li>**Diseño Funcional:** Cada prenda pasa por rigurosas pruebas de usabilidad y ergonomía para garantizar su adaptabilidad al movimiento urbano.</li>
+                        <li>**Sostenibilidad y Ética:** Compromiso con prácticas de producción socialmente responsables y la minimización del impacto ambiental, usando materiales reciclados y orgánicos.</li>
+                        <li>**Garantía al Cliente:** Ofrecemos una garantía total de satisfacción en todos nuestros productos.</li>
+                    </ul>
+                    <h3 class="text-2xl font-bold mt-8 mb-4 flex items-center"><i data-lucide="map-pin" class="w-6 h-6 mr-2 text-secondary"></i> Ubicación Física (Oficinas Centrales)</h3>
+                    <p class="text-gray-700">Av. Las Américas No. 322, Colonia Ladrón de Guevara, Guadalajara, Jalisco, México. (Nota: Esta es la dirección de nuestras oficinas administrativas. Las ventas son exclusivamente online).</p>
+                    <div class="mt-4 w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500 font-medium border border-dashed border-gray-400">
+                        [MAPA SIMULADO DE UBICACIÓN]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. SECCIÓN DE PREGUNTAS FRECUENTES (FAQ) -->
+        <!-- Se agrega la clase 'page-content' y data-page="faq" -->
+        <section id="faq" data-page="faq" class="page-content py-16 bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-extrabold text-center mb-12 text-dark">Preguntas <span class="text-primary">Frecuentes</span></h2>
+
+            <div class="max-w-4xl mx-auto space-y-4">
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="w-full text-left p-4 font-semibold text-lg flex justify-between items-center hover:bg-light transition" onclick="toggleAccordion(this)">
+                        <span>¿Cuál es el tiempo de envío?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 transform transition-transform duration-300"></i>
+                    </button>
+                    <div class="p-4 text-gray-600 bg-gray-50 hidden">
+                        <p>Los envíos estándar tardan de 3 a 5 días hábiles en la zona metropolitana y de 5 a 8 días en el resto del país. Ofrecemos una opción de Envío Express de 24 horas por un costo adicional.</p>
+                    </div>
+                </div>
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="w-full text-left p-4 font-semibold text-lg flex justify-between items-center hover:bg-light transition" onclick="toggleAccordion(this)">
+                        <span>¿Cómo puedo realizar una devolución o cambio?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 transform transition-transform duration-300"></i>
+                    </button>
+                    <div class="p-4 text-gray-600 bg-gray-50 hidden">
+                        <p>Aceptamos devoluciones hasta 30 días después de la compra, siempre y cuando la prenda esté sin usar, con sus etiquetas y en su empaque original. Simplemente inicia el proceso desde la sección "Mi Cuenta".</p>
+                    </div>
+                </div>
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="w-full text-left p-4 font-semibold text-lg flex justify-between items-center hover:bg-light transition" onclick="toggleAccordion(this)">
+                        <span>¿Sus productos son sostenibles?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 transform transition-transform duration-300"></i>
+                    </button>
+                    <div class="p-4 text-gray-600 bg-gray-50 hidden">
+                        <p>Estamos comprometidos con la sostenibilidad. Utilizamos algodón orgánico, poliéster reciclado y minimizamos el uso de agua. Todos nuestros empaques son 100% biodegradables.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. FORMULARIO DE CONTÁCTAME / SOPORTE -->
+        <!-- Se agrega la clase 'page-content' y data-page="contacto" -->
+        <section id="contacto" data-page="contacto" class="page-content py-16 bg-light">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-extrabold text-center mb-12 text-dark">¿Necesitas <span class="text-secondary">Ayuda?</span></h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 bg-white p-8 rounded-xl shadow-2xl">
+                    <!-- Formulario -->
+                    <div class="md:col-span-2">
+                        <h3 class="text-2xl font-bold mb-6 text-dark">Formulario de Contacto</h3>
+                        <form onsubmit="handleFormSubmit(event)">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                                <input type="text" placeholder="Nombre completo" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition">
+                                <input type="email" placeholder="Correo electrónico" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition">
+                            </div>
+                            <input type="text" placeholder="Asunto" required class="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:ring-primary focus:border-primary transition">
+                            <textarea placeholder="Tu mensaje..." rows="5" required class="w-full p-3 border border-gray-300 rounded-lg mb-6 focus:ring-primary focus:border-primary transition"></textarea>
+                            <button type="submit" class="w-full sm:w-auto px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary/80 transition duration-300 transform hover:scale-[1.01] shadow-lg">
+                                Enviar Mensaje
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Datos de Contacto/Redes -->
+                    <div class="md:col-span-1 border-t md:border-t-0 md:border-l border-gray-200 md:pl-8 pt-6 md:pt-0 space-y-6">
+                        <h3 class="text-2xl font-bold text-dark">Contacto Directo</h3>
+                        <div class="space-y-3">
+                            <p class="flex items-center text-gray-700"><i data-lucide="mail" class="w-5 h-5 mr-3 text-secondary"></i> info@estilourbano.com</p>
+                            <p class="flex items-center text-gray-700"><i data-lucide="phone" class="w-5 h-5 mr-3 text-secondary"></i> +52 3300 0000</p>
+                            <p class="flex items-center text-gray-700"><i data-lucide="map-pin" class="w-5 h-5 mr-3 text-secondary"></i> Av. Las Américas No. 322, Guadalajara, Jalisco, México</p>
+                        </div>
+                        
+                        <!-- Acceso a Redes Sociales -->
+                        <div class="pt-4 border-t border-gray-100">
+                            <h4 class="font-semibold mb-3">Síguenos</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-dark hover:text-primary transition"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+                                <a href="#" class="text-dark hover:text-primary transition"><i data-lucide="facebook" class="w-6 h-6"></i></a>
+                                <a href="#" class="text-dark hover:text-primary transition"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+                                <a href="#" class="text-dark hover:text-primary transition"><i data-lucide="youtube" class="w-6 h-6"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 7. CHAT WIDGET (Simulación de Chat) -->
+    <div id="chat-widget">
+        <button id="open-chat" class="w-14 h-14 bg-secondary text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-secondary/90 transition transform hover:scale-105">
+            <i data-lucide="message-square" class="w-7 h-7"></i>
+        </button>
+        
+        <div id="chat-box" class="hidden absolute bottom-16 right-0 w-80 bg-white rounded-xl shadow-2xl border border-gray-200 flex flex-col h-96">
+            <div class="bg-primary text-white p-3 rounded-t-xl flex justify-between items-center">
+                <span class="font-bold">Chat de Soporte Urbano</span>
+                <button onclick="closeChat()" class="text-white hover:text-gray-200"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <div id="chat-messages" class="flex-grow p-4 overflow-y-auto space-y-3 text-sm">
+                <!-- Mensajes del chat se insertarán aquí -->
+                <div class="flex justify-start">
+                    <div class="bg-light p-3 rounded-t-xl rounded-br-xl max-w-[80%]">
+                        ¡Hola! Soy tu asistente virtual. ¿En qué puedo ayudarte hoy con tu Estilo Urbano?
+                    </div>
+                </div>
+            </div>
+            <div class="p-3 border-t border-gray-200 flex">
+                <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." class="flex-grow p-2 border border-gray-300 rounded-l-lg focus:ring-primary focus:border-primary text-sm">
+                <button onclick="sendMessage()" class="bg-primary text-white p-2 rounded-r-lg hover:bg-primary/80 transition">
+                    <i data-lucide="send" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 8. FOOTER (con enlaces a secciones informativas) -->
+    <footer class="bg-dark text-white pt-12 pb-8 mt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-5 gap-8">
+            <!-- Columna 1: Logo y Slogan -->
+            <div class="col-span-2 md:col-span-1">
+                <a href="#" data-page-link="inicio" class="flex items-center space-x-2 mb-4">
+                    <!-- LOGO ACTUALIZADO: Se usó data-lucide="zap" -->
+                    <i data-lucide="zap" class="w-6 h-6 text-primary stroke-2"></i>
+                    <span class="text-xl font-extrabold tracking-tight text-white">Estilo Urbano</span>
+                </a>
+                <p class="text-sm text-gray-400">Innovación en cada hilo.</p>
+            </div>
+
+            <!-- Columna 2: Menú Principal -->
+            <div>
+                <h4 class="font-bold mb-3 text-primary uppercase text-sm">Menú Principal</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <!-- Se cambia href="#section" por onclick="showPage('section')" -->
+                    <li><a href="#" data-page-link="inicio" class="hover:text-white transition">Inicio</a></li>
+                    <li><a href="#" data-page-link="tienda" class="hover:text-white transition">Tienda Virtual</a></li>
+                    <li><a href="#" data-page-link="carrito" class="hover:text-white transition">Mi Carrito</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Información de la Empresa (Quiénes Somos, Misión, Visión, Políticas) -->
+            <div>
+                <h4 class="font-bold mb-3 text-primary uppercase text-sm">Nosotros</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <!-- Se cambia href="#section" por onclick="showPage('section')" -->
+                    <li><a href="#" data-page-link="nosotros" class="hover:text-white transition">Quiénes Somos</a></li>
+                    <li><a href="#" data-page-link="nosotros" class="hover:text-white transition">Misión y Visión</a></li>
+                    <li><a href="#" data-page-link="nosotros" class="hover:text-white transition">Políticas de Calidad</a></li>
+                    <li><a href="#" data-page-link="nosotros" class="hover:text-white transition">Ubicación Física</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 4: Soporte -->
+            <div>
+                <h4 class="font-bold mb-3 text-primary uppercase text-sm">Soporte</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <!-- Se cambia href="#section" por onclick="showPage('section')" -->
+                    <li><a href="#" data-page-link="contacto" class="hover:text-white transition">Contáctame</a></li>
+                    <li><a href="#" data-page-link="faq" class="hover:text-white transition">Preguntas Frecuentes</a></li>
+                    <li><a href="#" data-page-link="contacto" class="hover:text-white transition">Devoluciones</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 5: Redes Sociales -->
+            <div>
+                <h4 class="font-bold mb-3 text-primary uppercase text-sm">Síguenos</h4>
+                <div class="flex space-x-3">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i data-lucide="facebook" class="w-6 h-6"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8 pt-4 border-t border-gray-700 text-center text-sm text-gray-500">
+            &copy; 2024 Estilo Urbano. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <!-- JavaScript para interacciones no funcionales y el NUEVO ROUTING SPA -->
+    <script>
+        // --- Nuevo Router Simple (SPA) ---
+        function showPage(pageId) {
+            // Oculta todas las secciones
+            document.querySelectorAll('.page-content').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Muestra solo la sección deseada
+            const targetSection = document.querySelector(`[data-page="${pageId}"]`);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Simular un cambio de URL (opcional, pero útil para historial)
+            history.pushState(null, '', `#${pageId}`);
+
+            // Siempre lleva al inicio de la página visible
+            window.scrollTo(0, 0);
+        }
+        
+        // Inicializar: mostrar la página basada en el hash de la URL o "inicio" por defecto
+        function initializeRouter() {
+            const hash = window.location.hash.replace('#', '');
+            const defaultPage = 'inicio';
+            showPage(hash || defaultPage);
+        }
+
+        // --- MANEJADOR DE CLICS CENTRALIZADO (más robusto) ---
+        document.addEventListener('click', (e) => {
+            let target = e.target;
+            // Buscar el elemento 'a' que disparó el evento
+            while (target && target.tagName !== 'A') {
+                target = target.parentNode;
+            }
+
+            if (target && target.hasAttribute('data-page-link')) {
+                // Prevenir la navegación por defecto (recarga o salto a ancla)
+                e.preventDefault();
+                
+                // Obtener el ID de la página y mostrarla
+                const pageId = target.getAttribute('data-page-link');
+                showPage(pageId);
+            }
+        });
+
+
+        // Ejecutar la inicialización inmediatamente después de que el DOM esté listo
+        document.addEventListener('DOMContentLoaded', initializeRouter);
+        // También maneja el botón de atrás/adelante del navegador
+        window.addEventListener('popstate', initializeRouter); 
+
+
+        // --- Funcionalidad del Slider ---
+        const slider = document.getElementById('product-slider');
+        // El ancho se calcula dentro de la función para ser más seguro
+        function scrollSlider(direction) {
+            if (slider) {
+                const scrollAmount = slider.clientWidth; 
+                slider.scrollBy({
+                    left: direction * scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // --- Funcionalidad del Acordeón (FAQ) ---
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            // Cerrar todos los demás
+            document.querySelectorAll('#faq .p-4.bg-gray-50').forEach(item => {
+                if (item !== content) {
+                    item.classList.add('hidden');
+                    item.previousElementSibling.querySelector('i').classList.remove('rotate-180');
+                }
+            });
+
+            // Abrir/Cerrar el actual
+            content.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // --- Funcionalidad de Chat Widget ---
+        const chatButton = document.getElementById('open-chat');
+        const chatBox = document.getElementById('chat-box');
+        const chatInput = document.getElementById('chat-input');
+        const chatMessages = document.getElementById('chat-messages');
+
+        chatButton.addEventListener('click', () => {
+            chatBox.classList.toggle('hidden');
+            if (!chatBox.classList.contains('hidden')) {
+                chatInput.focus();
+            }
+        });
+
+        function closeChat() {
+            chatBox.classList.add('hidden');
+        }
+
+        function sendMessage() {
+            const text = chatInput.value.trim();
+            if (text !== "") {
+                // Agregar mensaje del usuario
+                const userMsg = document.createElement('div');
+                userMsg.className = 'flex justify-end';
+                userMsg.innerHTML = `<div class="bg-primary text-white p-3 rounded-t-xl rounded-bl-xl max-w-[80%]">${text}</div>`;
+                chatMessages.appendChild(userMsg);
+                
+                chatInput.value = '';
+                chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll al final
+
+                // Simular respuesta del asistente
+                setTimeout(() => {
+                    const botMsg = document.createElement('div');
+                    botMsg.className = 'flex justify-start';
+                    botMsg.innerHTML = `<div class="bg-light p-3 rounded-t-xl rounded-br-xl max-w-[80%]">Gracias por tu mensaje. Un agente te atenderá pronto.</div>`;
+                    chatMessages.appendChild(botMsg);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1000);
+            }
+        }
+
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // --- Simulación de Envío de Formulario ---
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            // Mostrar una notificación de éxito (simulada, ya que no se usa alert)
+            const submitButton = event.target.querySelector('button[type="submit"]');
+            submitButton.textContent = 'Mensaje Enviado ✅';
+            submitButton.classList.remove('bg-primary');
+            submitButton.classList.add('bg-green-600');
+            
+            // Revertir después de 3 segundos
+            setTimeout(() => {
+                submitButton.textContent = 'Enviar Mensaje';
+                submitButton.classList.add('bg-primary');
+                submitButton.classList.remove('bg-green-600');
+                event.target.reset(); // Limpiar el formulario
+            }, 3000);
+        }
+        
+        // --- Re-ejecutar lucide.createIcons() después de cambios de contenido ---
+        // Se llama en cada inicialización de página o al cargar
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+
+    </script>
+</body>
+</html>
