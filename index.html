@@ -146,7 +146,7 @@
                     <!-- Novedad 1 -->
                     <div class="rounded-xl overflow-hidden shadow-lg bg-white group hover:shadow-xl transition duration-300">
                         <a href="#" data-page-link="tienda">
-                            <img src="https://placehold.co/600x400/FF4D6D/ffffff?text=Producto+Nuevo+1" alt="Chaqueta Techwear" class="w-full h-72 object-cover transition duration-500 group-hover:scale-[1.03] group-hover:opacity-80">
+                            <img src="images/121411_13_11.jpg" alt="Chaqueta Techwear" class="w-full h-72 object-cover transition duration-500 group-hover:scale-[1.03] group-hover:opacity-80">
                             <div class="p-6">
                                 <h3 class="text-xl font-bold text-dark mb-1">Urban Tracker Jacket</h3>
                                 <p class="text-gray-500 text-sm">Chaqueta impermeable con diseño modular.</p>
@@ -161,7 +161,7 @@
                     <!-- Novedad 2 -->
                     <div class="rounded-xl overflow-hidden shadow-lg bg-white group hover:shadow-xl transition duration-300">
                         <a href="#" data-page-link="tienda">
-                            <img src="https://placehold.co/600x400/008DFF/ffffff?text=Producto+Nuevo+2" alt="Zapatillas Ligeras" class="w-full h-72 object-cover transition duration-500 group-hover:scale-[1.03] group-hover:opacity-80">
+                            <img src="images/sneakers_1600x.webp" alt="Zapatillas Ligeras" class="w-full h-72 object-cover transition duration-500 group-hover:scale-[1.03] group-hover:opacity-80">
                             <div class="p-6">
                                 <h3 class="text-xl font-bold text-dark mb-1">Sneakers Fusion Mesh</h3>
                                 <p class="text-gray-500 text-sm">Calzado ultra-ligero y transpirable para la ciudad.</p>
@@ -177,38 +177,35 @@
 
                 <!-- 2.3 LOS MÁS VENDIDOS (Estructura de 4 columnas) -->
                 <h2 class="text-3xl font-extrabold text-center mb-10 text-dark">Los Más Vendidos</h2>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <script>
-                        // Datos para los más vendidos (4 productos)
-                        const bestSellers = [
-                            { name: "Sudadera Neon Pink", price: "72.00", rating: 4.7, img_color: "FF4D6D" },
-                            { name: "Mochila Anti-robo Coder", price: "95.00", rating: 5.0, img_color: "1F2937" },
-                            { name: "Tenis UrbanLite PRO", price: "120.50", rating: 4.5, img_color: "008DFF" },
-                            { name: "Gorra Techwear", price: "29.99", rating: 4.7, img_color: "F3F4F6" },
-                        ];
+               <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+    <script>
+        const bestSellers = [
+            { name: "Sudadera Urban", price: "72.00", rating: 4.7, img: "images/Sudaderas de hombre 6.webp" }, // Añadido 'img' con la ruta
+            { name: "Mochila Anti-robo Coder", price: "95.00", rating: 5.0, img: "images/A2441-Z.jpg" },
+            { name: "Tenis UrbanLite PRO", price: "120.50", rating: 4.5, img: "images/9_399a1fa3-1412-41d7-a800-1994639fd14a.webp" },
+            { name: "Gorra Techwear", price: "29.99", rating: 4.7, img: "images/gorra-denim-bordada.png" },
+        ];
 
-                        bestSellers.forEach(p => {
-                            document.write(`
-                                <div class="group relative bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-0.5">
-                                    <a href="#" data-page-link="tienda">
-                                        <div class="w-full h-48 overflow-hidden bg-gray-200">
-                                            <img src="https://placehold.co/300x400/${p.img_color}/ffffff?text=${p.name.replace(/\s/g, '+')}" alt="${p.name}" class="h-full w-full object-cover object-center group-hover:opacity-90 transition duration-500">
-                                        </div>
-                                        <div class="p-3">
-                                            <h3 class="text-sm font-semibold text-dark truncate">${p.name}</h3>
-                                            <div class="flex items-center mt-1">
-                                                <!-- Estrellas de Valoración (función JS del catálogo) -->
-                                                <div class="flex -space-x-1">${generateStars(p.rating)}</div>
-                                            </div>
-                                            <p class="text-lg font-bold text-primary mt-1">$${p.price}</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            `);
-                        });
-                    </script>
+        bestSellers.forEach(p => {
+            document.write(`
+                <div class="group relative bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-0.5">
+                    <a href="#" data-page-link="tienda">
+                        <div class="w-full h-48 overflow-hidden bg-gray-200">
+                            <img src="${p.img}" alt="${p.name}" class="h-full w-full object-cover object-center group-hover:opacity-90 transition duration-500">
+                        </div>
+                        <div class="p-3">
+                            <h3 class="text-sm font-semibold text-dark truncate">${p.name}</h3>
+                            <div class="flex items-center mt-1">
+                                <div class="flex -space-x-1">${generateStars(p.rating)}</div>
+                            </div>
+                            <p class="text-lg font-bold text-primary mt-1">$${p.price}</p>
+                        </div>
+                    </a>
                 </div>
-            </div>
+            `);
+        });
+    </script>
+</div>
         </section>
 
         <!-- 3. TIENDITA VIRTUAL (Catálogo de 20 productos) -->
