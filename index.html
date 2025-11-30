@@ -318,57 +318,57 @@
             <!-- Grid de Productos (20 simulados - replicando el anterior) -->
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
                 <script>
-                    const products = [
-                        { name: "Chaqueta Cortavientos Neo", price: "89.99", rating: 4.8 },
-                        { name: "Tenis UrbanLite PRO", price: "120.50", rating: 4.5 },
-                        { name: "Hoodie Reflectiva X", price: "65.00", rating: 4.9 },
-                        { name: "Pantalón Cargo Blackout", price: "79.99", rating: 4.6 },
-                        { name: "Gorra Techwear", price: "29.99", rating: 4.7 },
-                        { name: "Camiseta Algodón Orgánico", price: "35.00", rating: 4.4 },
-                        { name: "Mochila Anti-robo Coder", price: "95.00", rating: 5.0 },
-                        { name: "Calcetines Tácticos (3-pack)", price: "19.99", rating: 4.3 },
-                        { name: "Sudadera Neon Pink", price: "72.00", rating: 4.7 },
-                        { name: "Tenis Malla Transpirable", price: "110.00", rating: 4.5 },
-                        { name: "Abrigo Largo Utility", price: "150.00", rating: 4.8 },
-                        { name: "Pantalón Jogger Comfort", price: "55.00", rating: 4.6 },
-                        { name: "Riñonera Crossover", price: "45.00", rating: 4.4 },
-                        { name: "Camisa Oversize Denim", price: "60.00", rating: 4.7 },
-                        { name: "Anillo Inteligente NFC", price: "135.00", rating: 4.9 },
-                        { name: "Shorts Deportivos Lite", price: "40.00", rating: 4.5 },
-                        { name: "Set de Parches Urbanos", price: "15.00", rating: 4.2 },
-                        { name: "Pulsera LED de Neón", price: "25.00", rating: 4.6 },
-                        { name: "Guantes Táctiles Invierno", price: "39.99", rating: 4.8 },
-                        { name: "Cadena Plateada Minimal", price: "50.00", rating: 4.5 }
-                    ];
-                    
-                    
-                    // Generar los 20 productos del catálogo
-                    products.forEach(p => {
-                        document.write(`
-                            <div class="group relative bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                                <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-200 h-64">
-                                    <img src="https://placehold.co/300x400/D1D5DB/${p.rating >= 4.7 ? '008DFF' : '1F2937'}?text=${p.name.replace(/\s/g, '+')}" alt="${p.name}" class="h-full w-full object-cover object-center group-hover:opacity-75 transition duration-500">
-                                </div>
-                                <div class="p-4 flex flex-col justify-between">
-                                    <h3 class="text-sm font-semibold text-dark truncate">
-                                        <a href="#" data-page-link="tienda" class="hover:text-primary transition">
-                                            ${p.name}
-                                        </a>
-                                    </h3>
-                                    <div class="flex items-center mt-1">
-                                        <div class="flex -space-x-1">${generateStars(p.rating)}</div>
-                                        <span class="ml-2 text-xs text-gray-500">(${p.rating})</span>
-                                    </div>
-                                    <p class="text-lg font-bold text-primary mt-2">$${p.price}</p>
-                                    <!-- Botón de Valoración y Agregar (simulación) -->
-                                    <button class="mt-3 w-full py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary/80 transition duration-300">
-                                        Añadir al Carrito
-                                    </button>
-                                </div>
-                            </div>
-                        `);
-                    });
-                </script>
+    const products = [
+        // Asegúrate de cambiar 'img/...' por las rutas correctas a tus imágenes
+        { name: "Chaqueta Cortavientos Neo", price: "89.99", rating: 4.8, img: "images/61AvWx7-z3L._AC_SX569_.jpg" },
+        { name: "Tenis UrbanLite PRO", price: "120.50", rating: 4.5, img: "images/61PbxQ5NXUL._AC_SY500_.jpg" },
+        { name: "Hoodie Reflectiva X", price: "65.00", rating: 4.9, img: "images/51zL72MC1hL._AC_SX466_.jpg" },
+        { name: "Pantalón Cargo Blackout", price: "79.99", rating: 4.6, img: "images/61J40Bevv-L._AC_SX679_.jpg" },
+        { name: "Gorra Techwear", price: "29.99", rating: 4.7, img: "images/61xe9GYwiXL._AC_SX522_.jpg" },
+        { name: "Camiseta Algodón Orgánico", price: "35.00", rating: 4.4, img: "images/71EkGNAVEpL._AC_SX466_.jpg" },
+        { name: "Mochila Anti-robo Coder", price: "95.00", rating: 5.0, img: "images/A2441_22-gris_lrg.webp" },
+        { name: "Calcetines Tácticos (3-pack)", price: "19.99", rating: 4.3, img: "images/81Q95ucZ4fL._AC_SX425_.jpg" },
+        { name: "Sudadera Neon Pink", price: "72.00", rating: 4.7, img: "images/61FWvZfMDGL._AC_SX466_.jpg" },
+        { name: "Tenis Malla Transpirable", price: "110.00", rating: 4.5, img: "images/71UgiOS3aTL._AC_SY675_.jpg" },
+        // ... (Agrega el resto de las 10 rutas restantes)
+        { name: "Abrigo Largo Utility", price: "150.00", rating: 4.8, img: "images/61vAwcICy7L._AC_SX466_.jpg" },
+        { name: "Pantalón Jogger Comfort", price: "55.00", rating: 4.6, img: "images/61n31H2sxUL._AC_SX466_.jpg" },
+        { name: "Riñonera Crossover", price: "45.00", rating: 4.4, img: "img/rinonera-crossover.jpg" },
+        { name: "Camisa Oversize Denim", price: "60.00", rating: 4.7, img: "img/camisa-denim.jpg" },
+        { name: "Anillo Inteligente NFC", price: "135.00", rating: 4.9, img: "img/anillo-nfc.jpg" },
+        { name: "Shorts Deportivos Lite", price: "40.00", rating: 4.5, img: "img/shorts-lite.jpg" },
+        { name: "Set de Parches Urbanos", price: "15.00", rating: 4.2, img: "img/parches-urbanos.jpg" },
+        { name: "Pulsera LED de Neón", price: "25.00", rating: 4.6, img: "img/pulsera-neon.jpg" },
+        { name: "Guantes Táctiles Invierno", price: "39.99", rating: 4.8, img: "img/guantes-tactiles.jpg" },
+        { name: "Cadena Plateada Minimal", price: "50.00", rating: 4.5, img: "img/cadena-minimal.jpg" }
+    ];
+    
+    // Generar los 20 productos del catálogo
+    products.forEach(p => {
+        document.write(`
+            <div class="group relative bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-200 h-64">
+                    <img src="${p.img}" alt="${p.name}" class="h-full w-full object-cover object-center group-hover:opacity-75 transition duration-500">
+                </div>
+                <div class="p-4 flex flex-col justify-between">
+                    <h3 class="text-sm font-semibold text-dark truncate">
+                        <a href="#" data-page-link="tienda" class="hover:text-primary transition">
+                            ${p.name}
+                        </a>
+                    </h3>
+                    <div class="flex items-center mt-1">
+                        <div class="flex -space-x-1">${generateStars(p.rating)}</div>
+                        <span class="ml-2 text-xs text-gray-500">(${p.rating})</span>
+                    </div>
+                    <p class="text-lg font-bold text-primary mt-2">$${p.price}</p>
+                    <button class="mt-3 w-full py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary/80 transition duration-300">
+                        Añadir al Carrito
+                    </button>
+                </div>
+            </div>
+        `);
+    });
+</script>
             </div>
         </section>
 
